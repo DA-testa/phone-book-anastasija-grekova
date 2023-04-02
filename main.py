@@ -14,17 +14,13 @@ def write_responses(result):
 
 def process_queries(queries):
     result = []
-    # Keep dictionary of all existing contacts.
     contacts = {}
     for cur_query in queries:
         if cur_query.type == 'add':
-            # Add or update contact's name
             contacts[cur_query.number] = cur_query.name
         elif cur_query.type == 'del':
-            # Remove contact, if it exists
             contacts.pop(cur_query.number, None)
         else:
-            # Look up contact by number
             response = contacts.get(cur_query.number, 'not found')
             result.append(response)
     return result
